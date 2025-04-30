@@ -12,18 +12,9 @@ public class CameraControll : MonoBehaviour
         GameManager.SetComponent(this);
     }
 
-    private void Update()
-    {
-        this.transform.position = Vector3.Lerp(this.transform.position, target, 0.05f);
-    }
-
-    public void UpPos()
-    {
-        target = this.transform.position + (Vector3.up * 0.1f);
-    }
-
-    public void ChangeColor()
-    {
-        cam.backgroundColor = Color.white;
-    }
+    private void Update() => this.transform.position = Vector3.Lerp(this.transform.position, target, 0.05f);
+    
+    public void UpPos() => target = this.transform.position + (Vector3.up * 0.2f);
+    
+    public void ChangeColor() => cam.backgroundColor = Color.white;  
 }

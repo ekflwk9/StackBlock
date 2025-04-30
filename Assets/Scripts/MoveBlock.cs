@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class MoveBlock : MonoBehaviour
 {
@@ -14,24 +13,22 @@ public class MoveBlock : MonoBehaviour
     private void Awake()
     {
         rigid = GetComponent<Rigidbody>();
+        ChangePos();
         GameManager.SetComponent(this);
     }
 
     private void Update()
     {
-        CheckMove();
-    }
-
-    private void CheckMove()
-    {
         var thisPos = transform.position;
 
+        //옆쪽 이동 검사
         if (horizontal)
         {
             if (thisPos.x < maxRange && !vertical) Direction();
             else if (thisPos.x > maxRange && vertical) Direction();
         }
 
+        //앞쪽 이동 검사
         else
         {
             if (thisPos.z < maxRange && vertical) Direction();
@@ -41,6 +38,7 @@ public class MoveBlock : MonoBehaviour
 
     private void Direction()
     {
+        //방향 전환
         var temp = movePos;
         movePos = target;
         target = temp;
@@ -61,7 +59,7 @@ public class MoveBlock : MonoBehaviour
         vertical = false;
 
         //y
-        movePos.y = this.transform.position.y + 0.1f;
+        movePos.y = this.transform.position.y + 0.2f;
         target.y = movePos.y;
 
         //x, z
@@ -82,10 +80,5 @@ public class MoveBlock : MonoBehaviour
         //할당
         this.transform.position = movePos;
         rigid.linearVelocity = target - movePos;
-    }
-
-    public void SetScale(Vector3 _scale)
-    {
-
     }
 }
